@@ -22,7 +22,6 @@ def signup():
         conpassword = request.form['conpassword']
         email = request.form['email']
         role = request.form['owners']
-        
         user = User.query.filter_by(email=email).first()
         if user is None:
             if password == conpassword :
@@ -35,7 +34,6 @@ def signup():
                 return render_template('signup.html', msg = "Your password and confirmation password do not match.")
         else:
             return render_template('signup.html', msg = "Your email is already exists")
-                
     return render_template('signup.html')
 
 
@@ -51,11 +49,16 @@ def login():
             print(user.id)
             session['userid'] = user.id 
             print("session id", session.get('userid'))
-            return render_template('login.html')
+            return render_template('index3.html')
             
         
     return render_template('login.html')
 
+
+
+@app.route('/dashboard')
+def dashboard():
+   return render_template('index3.html')
 
 
 
