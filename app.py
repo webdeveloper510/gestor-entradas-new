@@ -1,8 +1,7 @@
-from flask import Flask, jsonify, render_template, request, redirect, session, abort, flash, send_file
+from flask import Flask, jsonify, render_template, request, redirect, session, abort, flash, send_file, session
 from db import app,db
 from models import User, Cliente
 from passlib.apps import custom_app_context as pwd_context
-
 
 
 
@@ -12,9 +11,7 @@ def index():
     return render_template('index1.html')
     #  discotecas=discotecas
 
-@app.route('/login')
-def login():
-   return render_template('login.html')
+
 
 @app.route('/signup', methods=['GET','POST'])
 def signup():
@@ -25,14 +22,40 @@ def signup():
         conpassword = request.form['conpassword']
         email = request.form['email']
         role = request.form['owners']
-        if password == conpassword :
-            password_hash = pwd_context.encrypt(password)
-            user = User(firstname=firstname,lastname=lastname,password=password_hash,email=email,role=role)
-            db.session.add(user)
-            db.session.commit()
+        
+        user = User.query.filter_by(email=email).first()
+        if user is None:
+            if password == conpassword :
+                password_hash = pwd_context.encrypt(password)
+                user = User(firstname=firstname,lastname=lastname,password=password_hash,email=email,role=role)
+                db.session.add(user)
+                db.session.commit()
+                return render_template('login.html')
+            else:
+                return render_template('signup.html', msg = "Your password and confirmation password do not match.")
         else:
-            return render_template('signup.html', msg = "Your password and confirmation password do not match.")
+            return render_template('signup.html', msg = "Your email is already exists")
+                
     return render_template('signup.html')
+
+
+
+@app.route('/login', methods=['GET','POST'])
+def login():
+    if request.method == 'POST':
+        email = request.form['email']
+        password = request.form['password']
+        user = User.query.filter_by(email=email).first()
+        passs = pwd_context.verify(password, user.password)
+        if passs == True:
+            print(user.id)
+            session['userid'] = user.id 
+            print("session id", session.get('userid'))
+            return render_template('login.html')
+            
+        
+    return render_template('login.html')
+
 
 
 
