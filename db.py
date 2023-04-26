@@ -14,7 +14,7 @@ app.secret_key = secrets.token_hex(16)
 app = Flask(__name__)
 
 app.config['SECRET_KEY'] = 'asdfghjkl'
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:@localhost:3306/myapp'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:Admin#123@localhost:3306/myapp'
 db.init_app(app)
 # db = SQLAlchemy(app)
 migrate = Migrate(app, db)
