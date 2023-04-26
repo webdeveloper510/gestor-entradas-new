@@ -1,7 +1,10 @@
-import secrets
 from flask import Flask, jsonify, render_template, request, redirect, session, abort, flash, send_file
-app = Flask(__name__, template_folder='templates', static_folder='static')
-app.secret_key = secrets.token_hex(16)
+from db import app,db
+from models import User, Cliente
+from passlib.apps import custom_app_context as pwd_context
+
+
+
 
 @app.route('/')
 def index():
@@ -13,12 +16,30 @@ def index():
 def login():
    return render_template('login.html')
 
-@app.route('/signup')
+@app.route('/signup', methods=['GET','POST'])
 def signup():
-   return render_template('signup.html')
+    if request.method == 'POST':
+        firstname = request.form['firstname']
+        lastname = request.form['lastname']
+        password = request.form['password']
+        conpassword = request.form['conpassword']
+        email = request.form['email']
+        role = request.form['owners']
+        if password == conpassword :
+            password_hash = pwd_context.encrypt(password)
+            user = User(firstname=firstname,lastname=lastname,password=password_hash,email=email,role=role)
+            db.session.add(user)
+            db.session.commit()
+        else:
+            return render_template('signup.html', msg = "Your password and confirmation password do not match.")
+    return render_template('signup.html')
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
 
 
 
