@@ -483,6 +483,10 @@ footer .social-icons a {
     right: 0;
 }
 
+.error{
+    color: red;
+}
+
 /* input.form-control {
     border-color: transparent;
     height: 44px;
