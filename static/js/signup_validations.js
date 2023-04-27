@@ -18,18 +18,38 @@ $(document).ready(function(){
            },
         },
         messages: {
-           firstname: "Please enter a valid Firstname",
-           lastname:"Please enter a valid Lastname",
-           owners:"Please choose a valid Role",
-           email:"Please enter a valid Email",
+           firstname: "Please enter Firstname",
+           lastname:"Please enter Lastname",
+           owners:"Please choose a Role",
+           email:"Please enter Email",
            password:{
-            required:"please enter a valid Password",
+            required:"please enter Password",
             minlength:"password should be 5 characters"
            },
            conpassword:{
-            required:"please enter a valid Confirm Password",
+            required:"please enter Confirm Password",
             minlength:"password should be 5 characters",
-            equalTo: "Password and Confirm Password should be equal"
+            equalTo: "Password and confirm password does not match"
+           }
+        }
+    });
+});
+
+
+
+
+$(document).ready(function(){
+    $('#loginform').validate({
+        rules: {
+           email:"required",
+           password: {
+            required: true,
+           }
+        },
+        messages: {
+           email:"Please enter Email",
+           password:{
+            required:"please enter Password",
            }
         }
     });
