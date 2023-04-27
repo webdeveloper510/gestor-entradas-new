@@ -22,6 +22,7 @@ def signup():
         conpassword = request.form['conpassword']
         email = request.form['email']
         role = request.form['owners']
+
         user = User.query.filter_by(email=email).first()
         if user is None:
             if password == conpassword :
@@ -29,11 +30,11 @@ def signup():
                 user = User(firstname=firstname,lastname=lastname,password=password_hash,email=email,role=role)
                 db.session.add(user)
                 db.session.commit()
-                return render_template('login.html')
+                return "User registered successfully"
             else:
-                return render_template('signup.html', msg = "Your password and confirmation password do not match.")
+                return "Your password and confirmation password do not match."
         else:
-            return render_template('signup.html', msg = "Your email is already exists")
+            return "Your email is already exists"
     return render_template('signup.html')
 
 
