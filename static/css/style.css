@@ -27,9 +27,9 @@ h1,h2,h3,h4,h5,h6,
     background-repeat: no-repeat;
 }
 
-img {
+/* img {
     width: 100%;
-}
+} */
 
 a {
     color: var(--dark);
@@ -38,8 +38,9 @@ a {
 }
 
 a:hover {
-    color: var(--brand);
+    color: #3347FF;
 }
+
 
 section {
     padding-top: 80px;
@@ -80,7 +81,7 @@ section {
 
 .hero-slider .owl-prev:hover,
 .hero-slider .owl-next:hover {
-    background-color: var(--brand) !important; 
+    background-color: #3347FF !important; 
 }
 
 .owl-dot.active span{
@@ -153,7 +154,7 @@ section {
 
 .social-icons a:hover {
     background-color: #fff;
-    color: var(--brand);
+    color: #3347FF;
 }
 .conditions-section{
     margin: 20px 0;
@@ -172,7 +173,7 @@ section {
 }
 
 .navbar .navbar-nav .nav-link.active {
-    color: var(--brand);
+    color: #3347FF;
 }
 
 .navbar-brand {
@@ -195,8 +196,8 @@ section {
 }
 
 .btn-brand:hover {
-    background-color: #d64022;
-    border-color: #d64022;
+    background-color: #33adff;
+    border-color: #33adff;
     color: #fff;
 }
 
