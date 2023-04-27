@@ -12,18 +12,13 @@
     <link href='https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../static/css/style.css">
 
-    <!-- js link -->
-
-    <script src="../static/js/jquery.min.js"></script>
-    <script src="../static/plugins/jquery-validation/jquery.validate.min.js"></script>
-    <!-- <script src="../static/plugins/jquery-validation/jquery.validate.js"></script> -->
-
-    <!-- <script src="jquery-3.6.4.min.js"></script> -->
-    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js" integrity="sha512-rstIgDs0xPgmG6RX1Aba4KV5cWJbAMcvRCVmglpam9SoHZiUCyQVDdH2LPlxoHtrv17XWblE/V/PP+Tr04hbtA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-    <script src="../static/js/signup_validations.js"></script>
-
    
 </head>
+
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="../static/js/signup_validations.js"></script>
+
 <body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="70">
 
 
@@ -48,24 +43,24 @@
     <!-- BOTTOM NAV -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
         <div class="container">
-            <a class="navbar-brand" href=""><img src="static/img/WIPPASS_icon.png" height=50 width=50 alt=""></a>
+            <a class="navbar-brand" href=""><img src="../static/img/WIPPASS_icon.png" height=50 width=50 alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item ">
-                        <a class="nav-link " href="{{ url_for('index') }}">Home</a>
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.path == url_for('index') %}active-link{% endif %}" href="{{ url_for('index')}}">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#about">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('login') }}">Login</a>
+                        <a class="nav-link {% if request.path == url_for('login') %}active-link{% endif %}" href="{{ url_for('login')}}">Login</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('signup') }}">SignUp</a>
+                        <a class="nav-link {% if request.path == url_for('signup') %}active-link{% endif %}"  href="{{ url_for('signup')}}">SignUp</a>
                     </li>
                 </ul>
                 <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal"
