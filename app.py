@@ -49,7 +49,7 @@ def login():
             print(user.id)
             session['userid'] = user.id 
             print("session id", session.get('userid'))
-            return render_template('index3.html')
+            return redirect('/dashboard')
             
         
     return render_template('login.html')
