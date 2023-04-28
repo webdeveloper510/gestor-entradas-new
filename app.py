@@ -42,10 +42,14 @@ def signup():
 @app.route('/login', methods=['GET','POST'])
 def login():
     if request.method == 'POST':
+        passs="False"
         email = request.form['email']
         password = request.form['password']
         user = User.query.filter_by(email=email).first()
-        passs = pwd_context.verify(password, user.password)
+        try:
+            passs = pwd_context.verify(password, user.password)
+        except Exception as e:
+            print(e)
         if passs == True:
             session['userid'] = user.id 
             session['firstname'] = user.firstname             
