@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, render_template, request, redirect, session, abort, flash, send_file, session
+from flask import Flask, jsonify, render_template, request, redirect, session, abort, flash, send_file, session,url_for
 from db import app,db
 from models import User, Cliente
 from passlib.apps import custom_app_context as pwd_context
@@ -48,9 +48,12 @@ def login():
         passs = pwd_context.verify(password, user.password)
         if passs == True:
             print(user.id)
+            firstname=user.firstname
+            print(firstname)
             session['userid'] = user.id 
+            session['firstname'] = user.firstname             
             print("session id", session.get('userid'))
-            return redirect('/dashboard')
+            return redirect(url_for('dashboard'))
             
         
     return render_template('login.html')
