@@ -47,15 +47,11 @@ def login():
         user = User.query.filter_by(email=email).first()
         passs = pwd_context.verify(password, user.password)
         if passs == True:
-            print(user.id)
-            firstname=user.firstname
-            print(firstname)
             session['userid'] = user.id 
             session['firstname'] = user.firstname             
-            print("session id", session.get('userid'))
-            return redirect(url_for('dashboard'))
-            
-        
+            return "Successfully"
+        else:
+            return "Incorrect email or password"    
     return render_template('login.html')
 
 

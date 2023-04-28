@@ -7,18 +7,21 @@
 <div class="container">
   <div class="login_main mt-3 mb-3" style="display: flex;align-items: center;justify-content: center;">  
 
-    <form class="form-control" action="{{ url_for('login') }}" method="post" style="max-width:50%;">
+    <form id="loginform" class="form-control" style="max-width:50%;">
+      <div class="mb-3">
+        <span id="errormsg" style="color: red;"></span>
+      </div> 
     <div class="col md-6 d-flex justify-content-center align-items-center">
       <div class="col md-6 mb-4 me-3">  
     <label for="exampleInputEmail1" class="form-label">Email address</label>
-    <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" >
+    <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" >
   </div>
 </div>
 <div class="col md-6 d-flex justify-content-center align-items-center">
   <div class="col md-6 mb-4 me-3">  
  
     <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input type="password" name="password" class="form-control" id="exampleInputPassword1" >
+    <input type="password" name="password" class="form-control" id="password" >
   </div>
 </div>
   <button type="submit" class="btn btn-primary">Login</button>
@@ -30,3 +33,33 @@
 </html>
 
   
+<script type="text/javascript">
+  $(document).on('submit','#loginform',function(e)
+                 {
+
+    e.preventDefault();
+
+    $.ajax({
+      type:'POST',
+      url:'/login',
+      data:{
+        email:$("#email").val(),
+        password:$("#password").val()
+      },
+      success:function(res)
+      {
+        console.log('res',res);
+     
+        if(res == "Successfully"){
+          window.location = "/dashboard";
+          $("#email").val('');
+          $("#password").val('');
+        }
+        else{
+          $('#errormsg').text(res);
+        }
+       
+      }
+    })
+  });
+</script>
