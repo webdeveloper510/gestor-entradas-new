@@ -1,6 +1,6 @@
 from flask import Flask, jsonify, render_template, request, redirect, session, abort, flash, send_file, session,url_for
 from db import app,db
-from models import User, Cliente
+from models import User, Cliente, Discoteca
 from passlib.apps import custom_app_context as pwd_context
 
 
@@ -52,7 +52,8 @@ def login():
             print(e)
         if passs == True:
             session['userid'] = user.id 
-            session['firstname'] = user.firstname             
+            session['firstname'] = user.firstname     
+            session['role'] = user.role      
             return "Successfully"
         else:
             return "Incorrect email or password"    
@@ -64,6 +65,31 @@ def login():
 def dashboard():
    return render_template('index3.html')
 
+
+
+def obtener_discotecas():
+   discotecas = []
+   try:
+      consulta = Discoteca.query.all()
+      print(consulta)
+      
+      for disco in consulta:
+         id=disco.id
+         nombre=disco.nombre
+         lugar=disco.lugar
+         aforo=disco.aforo
+         desc=disco.descripcion
+         discotecas.append({'id':id,'nombre':nombre,'lugar':lugar,'aforo':aforo,'descripcion':desc})
+      # Cerramos el cursor y la conexión a la base de datos
+     
+   except ValueError as e:
+      return -1
+   return discotecas
+
+@app.route('/discoteacachoices')
+def discotecachoices():
+    discotecas = obtener_discotecas()
+    return render_template('discotecachoices.html',discotecas=discotecas)
 
 
 if __name__ == "__main__":
