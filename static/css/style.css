@@ -512,3 +512,7 @@ input.form-control {
 .error{
     color: red;
 }
+
+.success{
+    color: green;
+}

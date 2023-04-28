@@ -52,6 +52,15 @@ class Evento(db.Model):
     aforo = db.Column(db.Integer,default=18)
     
     
+class Mapa(db.Model):
+    __tablename__ = 'mapa'
+    id = db.Column(db.Integer, primary_key = True)
+    queryString = db.Column(db.Text)
+    place_id = db.Column(db.Text)
+    cid = db.Column(db.Text)
+        
+    
+    
     
 print("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 

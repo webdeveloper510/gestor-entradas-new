@@ -10,6 +10,7 @@
     <form id="loginform" class="form-control" style="max-width:50%;">
       <div class="mb-3">
         <span id="errormsg" style="color: red;"></span>
+        <h5 id="success" style="color: green;"></h5>
       </div> 
     <div class="col md-6 d-flex justify-content-center align-items-center">
       <div class="col md-6 mb-4 me-3">  
@@ -51,12 +52,14 @@
         console.log('res',res);
      
         if(res == "Successfully"){
-          $('#errormsg').text("You are successfully logged in.");
+          $('#success').text('You have successfully logged in.');
           window.location = "/dashboard";
           $("#email").val('');
           $("#password").val('');
           $('#errormsg').text('');
-
+          window.setTimeout(function() {
+            window.location.href = '/dashboard';
+            }, 2000);
         }
         else{
           $('#errormsg').text(res);
